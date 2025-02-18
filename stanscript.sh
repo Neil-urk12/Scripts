@@ -30,6 +30,9 @@ if [[ $install_models =~ ^[Yy]$ ]]; then
     echo "4. Qwen 2.5-coder 7B"
     echo "5. Mistral-Nemo"
     echo "6. Granite3.1 Dense"
+    echo "7. Deepseek R1 14B"
+    echo "8. Qwen 2.5-coder 14B"
+    echo "9. Exit"
     echo -e "\nEnter the numbers of the models you want to install (e.g., 1 2 3 4):"
     read -r model_choices
     
@@ -58,6 +61,21 @@ if [[ $install_models =~ ^[Yy]$ ]]; then
             6)
                 echo "Installing Granite3.1 Dense"
                 ollama run granite3.1-dense
+                ;;
+            7)
+                echo "Installing Deepseek R1 14B"
+                ollama run deepseek-r1:14b
+                ;;  
+            8)
+                echo "Installing Qwen 2.5-coder 14B"
+                ollama run qwen2.5-coder:14b
+                ;;
+            9)
+                echo "Exiting..."
+                exit 0
+                ;;
+            *)
+                echo "Invalid choice. Please enter a valid number."
                 ;;
         esac
     done
