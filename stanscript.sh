@@ -1,11 +1,28 @@
 #!/bin/bash
 
+# Detect package manager
+if command -v apt &> /dev/null; then
+    PKG_MANAGER="apt"
+elif command -v dnf &> /dev/null; then
+    PKG_MANAGER="dnf"
+else
+    echo "Unsupported package manager. This script supports Debian/Ubuntu (apt) and Fedora (dnf) based systems."
+    exit 1
+fi
+
 # Check if Ollama is installed
 if ! command -v ollama &> /dev/null; then
     echo "Ollama is not installed. Installing now..."
     
-    # Install Ollama on Fedora
-    curl -fsSL https://ollama.com/install.sh | sh
+    # Install Ollama based on distribution
+    if [ "$PKG_MANAGER" = "apt" ]; then
+        # Install dependencies for Debian/Ubuntu
+        sudo apt update -y && sudo apt upgrade -y
+        curl -fsSL https://ollama.com/install.sh | sh
+    else
+        # Install Ollama on Fedora
+        curl -fsSL https://ollama.com/install.sh | sh
+    fi
     
     # Check if installation was successful
     if command -v ollama &> /dev/null; then

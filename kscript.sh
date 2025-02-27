@@ -8,3 +8,4 @@ sudo apt install fastfetch -y
 sudo apt install ranger -y
 sudo apt install btop -y
 sudo apt install htop -y
+
